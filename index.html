@@ -3,444 +3,329 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>OBLIX — Archive</title>
 
 <style>
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
 }
 
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 body {
-    background: #050505;
-    color: #f2f2f2;
-    font-family: Arial, Helvetica, sans-serif;
-    overflow-x: hidden;
+  margin: 0;
+  background: #030303;
+  color: #eee;
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
 }
 
-/* HEADER */
-
 header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 70px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 28px;
-    z-index: 100;
-    background: linear-gradient(
-        to bottom,
-        rgba(5,5,5,0.95),
-        rgba(5,5,5,0)
-    );
+  position: relative;
+  z-index: 10;
+  padding: 22px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #1d1d1d;
 }
 
 .logo {
-    font-size: 19px;
-    letter-spacing: 7px;
-    font-weight: 700;
+  font-size: 19px;
+  font-weight: bold;
+  letter-spacing: 6px;
 }
 
 .cart {
-    font-size: 10px;
-    letter-spacing: 3px;
-    cursor: pointer;
+  color: #777;
+  font-size: 10px;
+  letter-spacing: 3px;
 }
-
-/* HERO */
 
 .hero {
-    height: 100vh;
-    min-height: 650px;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  min-height: 78vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 70px 24px;
 }
 
-.hero-content {
-    text-align: center;
-    z-index: 10;
-}
-
-.small {
-    font-size: 9px;
-    letter-spacing: 6px;
-    opacity: 0.45;
-    margin-bottom: 22px;
+.hero-small {
+  color: #555;
+  font-size: 10px;
+  letter-spacing: 5px;
+  margin-bottom: 22px;
 }
 
 .hero h1 {
-    font-size: clamp(55px, 15vw, 150px);
-    letter-spacing: -5px;
-    line-height: 0.8;
-    font-weight: 900;
+  margin: 0;
+  font-size: clamp(70px, 18vw, 190px);
+  line-height: .78;
+  letter-spacing: -9px;
 }
 
-.hero p {
-    margin-top: 30px;
-    font-size: 9px;
-    letter-spacing: 5px;
-    opacity: 0.45;
+.hero-sub {
+  margin-top: 35px;
+  color: #666;
+  font-size: 10px;
+  letter-spacing: 4px;
 }
-
-/* WEB */
 
 .web {
-    position: absolute;
-    width: 620px;
-    height: 620px;
-    left: -180px;
-    top: 80px;
-    opacity: 0.35;
-    animation: webFloat 9s ease-in-out infinite;
-}
-
-.web2 {
-    position: absolute;
-    width: 500px;
-    height: 500px;
-    right: -180px;
-    bottom: -100px;
-    opacity: 0.3;
-    animation: webFloatReverse 11s ease-in-out infinite;
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  border: 1px solid #181818;
+  border-radius: 50%;
+  right: -180px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: .8;
+  animation: spin 18s linear infinite;
 }
 
 .web::before,
-.web::after,
-.web2::before,
-.web2::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 50%;
+.web::after {
+  content: "";
+  position: absolute;
+  inset: 55px;
+  border: 1px solid #181818;
+  border-radius: 50%;
 }
 
 .web::after {
-    inset: 90px;
+  inset: 120px;
 }
 
-.web2::after {
-    inset: 70px;
+.web-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 1px;
+  height: 100%;
+  background: #181818;
+  transform-origin: center;
 }
 
-.web-lines {
-    position: absolute;
-    inset: 0;
+.web-line:nth-child(1) {
+  transform: rotate(30deg);
 }
 
-.web-lines span {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 100%;
-    height: 1px;
-    background: rgba(255,255,255,0.18);
-    transform-origin: center;
+.web-line:nth-child(2) {
+  transform: rotate(60deg);
 }
 
-.web-lines span:nth-child(1) {
-    transform: rotate(0deg);
+.web-line:nth-child(3) {
+  transform: rotate(90deg);
 }
 
-.web-lines span:nth-child(2) {
-    transform: rotate(45deg);
+.web-line:nth-child(4) {
+  transform: rotate(120deg);
 }
 
-.web-lines span:nth-child(3) {
-    transform: rotate(90deg);
+.web-line:nth-child(5) {
+  transform: rotate(150deg);
 }
-
-.web-lines span:nth-child(4) {
-    transform: rotate(135deg);
-}
-
-@keyframes webFloat {
-    0%,100% {
-        transform: rotate(0deg) scale(1);
-    }
-    50% {
-        transform: rotate(8deg) scale(1.05);
-    }
-}
-
-@keyframes webFloatReverse {
-    0%,100% {
-        transform: rotate(0deg) scale(1);
-    }
-    50% {
-        transform: rotate(-10deg) scale(1.06);
-    }
-}
-
-/* BLOOD */
 
 .blood {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    width: 2px;
-    height: 100%;
-    background: linear-gradient(
-        to bottom,
-        transparent,
-        rgba(90,0,0,0.7),
-        rgba(140,0,0,0.9),
-        transparent
-    );
-    opacity: 0.8;
-    animation: bloodMove 4s ease-in-out infinite;
+  position: absolute;
+  top: -30px;
+  width: 2px;
+  background: linear-gradient(to bottom, #560000, #170000, transparent);
+  animation: drip 5s ease-in-out infinite;
 }
 
 .blood.one {
-    transform: translateX(-210px);
-    animation-delay: 0s;
+  right: 31%;
+  height: 180px;
 }
 
 .blood.two {
-    transform: translateX(150px);
-    animation-delay: 1.2s;
+  right: 17%;
+  height: 120px;
+  animation-delay: 1.7s;
 }
 
 .blood.three {
-    transform: translateX(310px);
-    animation-delay: 2.2s;
+  left: 13%;
+  height: 90px;
+  animation-delay: 3s;
 }
 
-@keyframes bloodMove {
-    0%,100% {
-        height: 25%;
-        opacity: 0.25;
-    }
-
-    50% {
-        height: 75%;
-        opacity: 0.8;
-    }
+@keyframes spin {
+  from {
+    transform: translateY(-50%) rotate(0deg);
+  }
+  to {
+    transform: translateY(-50%) rotate(360deg);
+  }
 }
 
-/* ARCHIVE */
+@keyframes drip {
+  0%, 100% {
+    transform: scaleY(.3);
+    transform-origin: top;
+    opacity: .2;
+  }
+  50% {
+    transform: scaleY(1);
+    transform-origin: top;
+    opacity: .8;
+  }
+}
 
 .archive {
-    padding: 130px 22px 100px;
-    max-width: 1200px;
-    margin: auto;
+  position: relative;
+  z-index: 2;
+  padding: 30px 24px 90px;
+  max-width: 1100px;
+  margin: auto;
 }
 
 .archive-title {
-    display: flex;
-    justify-content: space-between;
-    align-items: end;
-    margin-bottom: 35px;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  border-bottom: 1px solid #222;
+  padding-bottom: 18px;
+  margin-bottom: 14px;
 }
 
 .archive-title h2 {
-    font-size: 12px;
-    letter-spacing: 5px;
+  margin: 0;
+  font-size: 12px;
+  letter-spacing: 4px;
 }
 
 .archive-title span {
-    font-size: 8px;
-    letter-spacing: 3px;
-    opacity: 0.35;
+  color: #555;
+  font-size: 9px;
+  letter-spacing: 2px;
 }
 
-/* CARDS */
-
 .grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
 }
 
 .card {
-    height: 360px;
-    position: relative;
-    overflow: hidden;
-    background:
-        radial-gradient(
-            circle at 50% 45%,
-            rgba(80,80,80,0.15),
-            transparent 45%
-        ),
-        #0a0a0a;
-    border: 1px solid rgba(255,255,255,0.1);
-    cursor: pointer;
-    transition: 0.5s;
+  position: relative;
+  min-height: 330px;
+  border: 1px solid #202020;
+  background: #070707;
+  overflow: hidden;
+  text-decoration: none;
+  color: #eee;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: border-color .3s, transform .3s;
 }
 
 .card:hover {
-    transform: scale(0.985);
-    border-color: rgba(255,255,255,0.35);
+  border-color: #555;
+  transform: translateY(-3px);
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px;
+  color: #555;
+  font-size: 8px;
+  letter-spacing: 2px;
+}
+
+.card-center {
+  position: relative;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-center::before,
+.card-center::after {
+  content: "";
+  position: absolute;
+  border: 1px solid #1b1b1b;
+  border-radius: 50%;
+  width: 115px;
+  height: 115px;
+  animation: miniSpin 8s linear infinite;
+}
+
+.card-center::after {
+  width: 75px;
+  height: 75px;
+  animation-direction: reverse;
+}
+
+@keyframes miniSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .card-number {
-    position: absolute;
-    top: 18px;
-    left: 18px;
-    font-size: 8px;
-    letter-spacing: 3px;
-    opacity: 0.4;
+  position: relative;
+  z-index: 2;
+  font-size: 34px;
+  color: #292929;
+  font-weight: bold;
+}
+
+.card-bottom {
+  padding: 18px;
+  border-top: 1px solid #1b1b1b;
+}
+
+.card-name {
+  font-size: 21px;
+  letter-spacing: 2px;
 }
 
 .card-status {
-    position: absolute;
-    top: 18px;
-    right: 18px;
-    font-size: 7px;
-    letter-spacing: 2px;
-    opacity: 0.35;
+  margin-top: 8px;
+  color: #555;
+  font-size: 8px;
+  letter-spacing: 3px;
 }
-
-.card-content {
-    position: absolute;
-    left: 22px;
-    bottom: 22px;
-}
-
-.card h3 {
-    font-size: 25px;
-    letter-spacing: 3px;
-    margin-bottom: 10px;
-}
-
-.open {
-    font-size: 8px;
-    letter-spacing: 3px;
-    opacity: 0.4;
-}
-
-/* MINI WEB */
-
-.mini-web {
-    position: absolute;
-    width: 190px;
-    height: 190px;
-    right: -35px;
-    top: 55px;
-    border: 1px solid rgba(255,255,255,0.18);
-    border-radius: 50%;
-    animation: miniWeb 8s linear infinite;
-}
-
-.mini-web::before,
-.mini-web::after {
-    content: "";
-    position: absolute;
-    inset: 25px;
-    border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 50%;
-}
-
-.mini-web::after {
-    inset: 60px;
-}
-
-@keyframes miniWeb {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-/* CARD BLOOD */
-
-.card-blood {
-    position: absolute;
-    width: 1px;
-    height: 130px;
-    background: linear-gradient(
-        to bottom,
-        rgba(100,0,0,0.8),
-        transparent
-    );
-    top: 0;
-    animation: cardBlood 3s ease-in-out infinite;
-}
-
-.card-blood.a {
-    left: 30%;
-}
-
-.card-blood.b {
-    left: 65%;
-    animation-delay: 1s;
-}
-
-@keyframes cardBlood {
-    0%,100% {
-        height: 30px;
-        opacity: 0.2;
-    }
-
-    50% {
-        height: 160px;
-        opacity: 0.8;
-    }
-}
-
-/* FOOTER */
 
 footer {
-    padding: 35px 25px;
-    border-top: 1px solid rgba(255,255,255,0.08);
-    display: flex;
-    justify-content: space-between;
-    font-size: 7px;
-    letter-spacing: 3px;
-    opacity: 0.35;
+  border-top: 1px solid #1c1c1c;
+  padding: 28px 24px;
+  color: #444;
+  font-size: 9px;
+  letter-spacing: 3px;
 }
 
-/* MOBILE */
-
 @media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
 
-    header {
-        padding: 0 18px;
-    }
+  .hero {
+    min-height: 70vh;
+  }
 
-    .logo {
-        font-size: 16px;
-        letter-spacing: 5px;
-    }
+  .hero h1 {
+    letter-spacing: -5px;
+  }
 
-    .hero h1 {
-        font-size: 70px;
-    }
-
-    .grid {
-        grid-template-columns: 1fr;
-    }
-
-    .card {
-        height: 330px;
-    }
-
-    .web {
-        width: 450px;
-        height: 450px;
-        left: -250px;
-    }
-
-    .web2 {
-        width: 400px;
-        height: 400px;
-        right: -250px;
-    }
+  .web {
+    width: 390px;
+    height: 390px;
+    right: -210px;
+  }
 }
 </style>
 </head>
@@ -448,133 +333,112 @@ footer {
 <body>
 
 <header>
-    <div class="logo">OBLIX</div>
-    <div class="cart">КОРЗИНА</div>
+  <div class="logo">OBLIX</div>
+  <div class="cart">КОРЗИНА</div>
 </header>
 
 <section class="hero">
 
-    <div class="web">
-        <div class="web-lines">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </div>
+  <div class="hero-small">ARCHIVE / 2026</div>
 
-    <div class="web2">
-        <div class="web-lines">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </div>
+  <h1>OBLIX</h1>
 
-    <div class="blood one"></div>
-    <div class="blood two"></div>
-    <div class="blood three"></div>
+  <div class="hero-sub">
+    RITUAL / NOCTURNE / UNKNOWN
+  </div>
 
-    <div class="hero-content">
-        <div class="small">ARCHIVE / 2026</div>
+  <div class="web">
+    <div class="web-line"></div>
+    <div class="web-line"></div>
+    <div class="web-line"></div>
+    <div class="web-line"></div>
+    <div class="web-line"></div>
+  </div>
 
-        <h1>OBLIX</h1>
-
-        <p>RITUAL / NOCTURNE / UNKNOWN</p>
-    </div>
+  <div class="blood one"></div>
+  <div class="blood two"></div>
+  <div class="blood three"></div>
 
 </section>
-
 
 <section class="archive">
 
-    <div class="archive-title">
-        <h2>ARCHIVE</h2>
-        <span>04 SEALED FILES</span>
+  <div class="archive-title">
+    <h2>ARCHIVE</h2>
+    <span>SELECT FILE</span>
+  </div>
+
+  <div class="grid">
+
+    <a class="card" href="tshirts.html">
+      <div class="card-top">
+        <span>ARCHIVE 001</span>
+        <span>SEALED</span>
+      </div>
+
+      <div class="card-center">
+        <div class="card-number">01</div>
+      </div>
+
+      <div class="card-bottom">
+        <div class="card-name">T-SHIRTS</div>
+        <div class="card-status">OPEN ARCHIVE →</div>
+      </div>
+    </a>
+
+    <div class="card">
+      <div class="card-top">
+        <span>ARCHIVE 002</span>
+        <span>CLASSIFIED</span>
+      </div>
+
+      <div class="card-center">
+        <div class="card-number">02</div>
+      </div>
+
+      <div class="card-bottom">
+        <div class="card-name">LONG SLEEVES</div>
+        <div class="card-status">COMING SOON</div>
+      </div>
     </div>
 
-    <div class="grid">
+    <div class="card">
+      <div class="card-top">
+        <span>ARCHIVE 003</span>
+        <span>RESTRICTED</span>
+      </div>
 
-        <div class="card">
+      <div class="card-center">
+        <div class="card-number">03</div>
+      </div>
 
-            <div class="card-number">001</div>
-            <div class="card-status">SEALED</div>
-
-            <div class="mini-web"></div>
-
-            <div class="card-blood a"></div>
-            <div class="card-blood b"></div>
-
-            <div class="card-content">
-                <h3>T-SHIRTS</h3>
-                <div class="open">OPEN ARCHIVE →</div>
-            </div>
-
-        </div>
-
-
-        <div class="card">
-
-            <div class="card-number">002</div>
-            <div class="card-status">CLASSIFIED</div>
-
-            <div class="mini-web"></div>
-
-            <div class="card-blood a"></div>
-            <div class="card-blood b"></div>
-
-            <div class="card-content">
-                <h3>LONG SLEEVES</h3>
-                <div class="open">OPEN ARCHIVE →</div>
-            </div>
-
-        </div>
-
-
-        <div class="card">
-
-            <div class="card-number">003</div>
-            <div class="card-status">RESTRICTED</div>
-
-            <div class="mini-web"></div>
-
-            <div class="card-blood a"></div>
-            <div class="card-blood b"></div>
-
-            <div class="card-content">
-                <h3>JEANS</h3>
-                <div class="open">OPEN ARCHIVE →</div>
-            </div>
-
-        </div>
-
-
-        <div class="card">
-
-            <div class="card-number">004</div>
-            <div class="card-status">UNKNOWN</div>
-
-            <div class="mini-web"></div>
-
-            <div class="card-blood a"></div>
-            <div class="card-blood b"></div>
-
-            <div class="card-content">
-                <h3>ACCESSORIES</h3>
-                <div class="open">OPEN ARCHIVE →</div>
-            </div>
-
-        </div>
-
+      <div class="card-bottom">
+        <div class="card-name">JEANS</div>
+        <div class="card-status">COMING SOON</div>
+      </div>
     </div>
 
+    <div class="card">
+      <div class="card-top">
+        <span>ARCHIVE 004</span>
+        <span>UNKNOWN</span>
+      </div>
+
+      <div class="card-center">
+        <div class="card-number">04</div>
+      </div>
+
+      <div class="card-bottom">
+        <div class="card-name">ACCESSORIES</div>
+        <div class="card-status">COMING SOON</div>
+      </div>
+    </div>
+
+  </div>
 </section>
 
-
 <footer>
-    <span>OBLIX</span>
-    <span>ARCHIVE 2026</span>
+  OBLIX / ARCHIVE 2026
 </footer>
 
 </body>
